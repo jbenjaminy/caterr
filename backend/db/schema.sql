@@ -1,3 +1,13 @@
+create table if not exists admins (
+    id serial primary key,
+    username text not null unique,
+    password text not null,
+    first_name text not null,
+    last_name text not null,
+    phone integer not null,
+    email text not null unique
+);
+
 create table if not exists caterers (
     id serial primary key,
     username text not null unique,
@@ -104,9 +114,11 @@ create table if not exists events (
     attire text
 );
 
-create table if not exists staff_events (
+create table if not exists events_staff (
+    event_id integer not null references events,
     staff_id integer not null references staff,
-    event_id integer not null references events
+    responded boolean,
+    accepted boolean
 );
 
 create table if not exists caterers_staff (
