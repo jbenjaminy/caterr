@@ -1,7 +1,7 @@
 import React from 'react';
 import {Router, Route, IndexRoute, hashHistory} from 'react-router';
-import LandingPage from './components/landing';
-import ChatroomPage from './components/register';
+import Landing from './components/landing';
+import Register from './components/register';
 import Nav from './components/nav';
 
 let App = (props) => {

@@ -1,14 +1,62 @@
-@import url(https://fonts.googleapis.com/css?family=Alegreya+Sans:300,400);
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700|News+Cycle:400,700);
 
 @white: #ffffff;
-@dkGrey: #6C6C6C;
-@ltBlue: #3399ff;
+@dkGrey: darken(#6C6C6C, 10%);
+@ltBlue: lighten(#3399ff, 30%);
 @dkBlue: darken(#3399ff, 20%);
-@orange: #ff8000;
-@mdGrey: #f0f0f0;
+@ltGrey: lighten(#6C6C6C, 30%);
 
 body {
+	margin: 0;
+	height: 100%;
+	width: 100%;
 	.app {
+		height: 100%;
+		width: 90%;
+		margin: 0 auto;
+		font-family: 'Inconsolata';
+		color: @dkGrey;
 
+		input {
+			font-family: 'Inconsolata';
+			width: 200px;
+			margin-bottom: 20px;
+			font-size: 13px;
+			border-radius: 3px;
+			color: @ltGrey;
+			border: 1px solid @ltGrey;
+			text-align: center;
+		}
+		.nav {
+			height: 150px;
+			width: 100%;
+			text-align: center;
+			h1 {
+				font-size: 100px;
+				color: @ltBlue;
+				margin-top: 0;
+				margin-bottom: 0;
+				letter-spacing: 9px;
+			}
+		}
+		.landing {
+			width: 50%;
+			margin: 0 auto;
+			h3 {
+				text-align: center;
+				margin-left: -135px;
+			}
+			form {
+				text-align: center;
+				input {
+					width: 200px;
+					margin-bottom: 20px;
+				}
+			}
+			h4 {
+				text-align: center;
+				margin-top: 0;
+			}
+		}
 	}
 }

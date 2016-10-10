@@ -303,7 +303,7 @@ app.put('events/respond/:staff_id/:event_id', (req, res) => {
 /*--------------------------- RUN SERVER -------------------------------*/
 function runServer(callback) {
     let PORT = process.env.PORT || 8080;
-    server.listen(PORT, () => {
+    app.listen(PORT, () => {
         console.log(`Listening on localhost: ${PORT}`);
         if (callback) {
             callback();
