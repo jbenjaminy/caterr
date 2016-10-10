@@ -22,7 +22,7 @@ const hostUpdateEvent = require('./backend/functions/host/host-update-event');
 const deleteEvent = require('./backend/functions/host/delete-event');
 // host post message (select between admin/caterer)
 const addStaff = require('./backend/functions/staff/add-staff');
-const loginStaff = require('./backend/functions/host/login-staff');
+const loginStaff = require('./backend/functions/staff/login-staff');
 const staffUpdateStaff = require('./backend/functions/staff/staff-update-staff');
 const getEvents = require('./backend/functions/staff/get-events');
 const eventResponse = require('./backend/functions/staff/event-response');
