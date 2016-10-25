@@ -13,7 +13,7 @@ const removeEventStaff = require('./backend/functions/admin/remove-event-staff')
 // admin post message (select between caterers/hosts/staff)
 const addCaterer = require('./backend/functions/caterer/add-caterer');
 const loginCaterer = require('./backend/functions/caterer/login-caterer');
-const removeCatererStaff = require('./backend/functions/caterer/remove-caterer-staff');
+const reviewStaff = require('./backend/functions/caterer/remove-caterer-staff');
 // caterer post message (select between admin/hosts)
 const addHost = require('./backend/functions/host/add-host');
 const loginHost = require('./backend/functions/host/login-host');
@@ -22,6 +22,7 @@ const hostUpdateEvent = require('./backend/functions/host/host-update-event');
 const deleteEvent = require('./backend/functions/host/delete-event');
 // host post message (select between admin/caterer)
 const addStaff = require('./backend/functions/staff/add-staff');
+    // essentially creates when they submit application
 const loginStaff = require('./backend/functions/staff/login-staff');
 const staffUpdateStaff = require('./backend/functions/staff/staff-update-staff');
 const getEvents = require('./backend/functions/staff/get-events');
@@ -40,7 +41,7 @@ app.use(function(request, response, next) {
 });
 
 /*--------------------------- ADMIN ENDPOINTS ----------------------------*/
-// Caterer log-in
+// Admin log-in
 app.get('/admin/login', function(req, res) {
     let username = req.body.username;
     let password = req.body.password;
@@ -129,6 +130,8 @@ app.delete('events_staff/:event_id/:staff_id', (req, res) => {
         res.json(data);
     });
 });
+// store custom lists that he can pick from
+// ability to send to all or select individual results or select # of results
 
 /*--------------------------- CATERER ENDPOINTS ----------------------------*/
 // Register caterer
@@ -168,6 +171,8 @@ app.delete('/caterers_staff/:caterer_id/:staff_id', (req, res) => {
         res.json(data);
     });
 });
+// Request staff for event / request 
+// 
 
 /*--------------------------- HOST ENDPOINTS ----------------------------*/
 // Host register

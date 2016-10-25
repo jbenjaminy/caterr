@@ -5,10 +5,15 @@ create table if not exists admins (
     first_name text not null,
     last_name text not null,
     phone integer not null,
-    email text not null unique
+    email text not null unique,
+    -- choose which type of staff you can supply
+    has_waitstaff boolean not null,
+    has_bartenders boolean not null,
+    has_valets boolean not null,
+    has_models boolean not null
 );
 
-create table if not exists caterers (
+create table if not exists hosts (
     id serial primary key,
     username text not null unique,
     password text not null,
@@ -17,12 +22,13 @@ create table if not exists caterers (
     city text not null,
     state text not null,
     zip integer not null,
-    company_phone integer not null,
-    company_email text not null unique,
+    contact_first_name text not null,
+    contact_last_name text not null,
+    contact_phone integer not null,
+    contact_email text not null unique
+    company_phone integer,
+    company_email text unique,
     website text,
-    contact_name text not null,
-    contact_phone integer,
-    contact_email text unique
 );
 
 create table if not exists hosts (
@@ -38,6 +44,10 @@ create table if not exists hosts (
     phone integer not null,
     email text not null unique 
 );
+
+-- managers -- staff with extra access
+    -- can see all events, who has not replied, who's been offered, phone number and contact info
+
 
 create table if not exists staff (
     id serial primary key,
@@ -56,18 +66,25 @@ create table if not exists staff (
     dob date not null,
     -- 1999-01-08
     start_date date not null,
-    end_date date, 
-    is_active boolean,
     us_citizen boolean,
     prior_conviction boolean,
-    w2 boolean,
-    direct_deposit boolean,
     ss_copy boolean,
     dl_copy boolean,
     dl_num integer,
-    dl_exp date, 
+    dl_exp date,
     tabc boolean,
     tabc_exp date,
+    -- base pay rate tied to tabc
+    -- last 3 positions/relevant experience
+    -- # years catering/food service
+    -- don't need start date
+    -- desired salary
+    -- experience, what they want to be paid, availability, upload resume, ss card
+    w4 boolean,
+    direct_deposit boolean,
+    end_date date, 
+    is_active boolean,
+    is_lead boolean,
     salary integer,
     waitstaff boolean,
     bartender boolean,
@@ -95,8 +112,6 @@ create table if not exists staff (
 create table if not exists events (
     id serial primary key,
     host_id integer not null references hosts,
-    caterer_id integer references caterers, 
-    staff_lead_id integer references staff,
     event_title text not null,
     event_date date not null,
     event_start time not null,
@@ -106,11 +121,13 @@ create table if not exists events (
     event_city text not null,
     event_state text not null,
     event_zip integer not null,
-    num_guests integer,
+    num_guests integer not null,
+    notes text,
+    -- suggest how many of these are necessary
+    -- either scott calls back with a quote or they can see quote being generated with selections
     num_waitstaff integer,
     num_bartenders integer,
     num_valet integer,
-    num_models integer,
     attire text
 );
 
@@ -118,10 +135,16 @@ create table if not exists events_staff (
     event_id integer not null references events,
     staff_id integer not null references staff,
     responded boolean,
-    accepted boolean
+    accepted boolean,
+    -- timestamp
 );
 
-create table if not exists caterers_staff (
+create table if not exists hosts_staff (
     caterer_id integer not null references caterers,
-    staff_id integer not null references staff
+    staff_id integer not null references staff,
+    preferred boolean,
+    uneligable boolean,
+    notes text,
+    -- separate positive and negative feedback and post positive on their dashboard 
 );
+-- messages
