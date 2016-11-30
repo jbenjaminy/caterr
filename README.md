@@ -4,6 +4,7 @@
 -Make option for admin to compile list of staff who: are approved to work for particular caterer, are available, have certain pieces of attire, have certifications, etc.
 -enable admin to compile list of emails for people who do/not have completed paperwork
 -add training feature.
+-work more
 
 ### BACKEND:
 Setting up the database and backend server.
