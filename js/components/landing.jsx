@@ -4,10 +4,10 @@ import {connect} from 'react-redux'
 
 class Landing extends React.Component {
 
-    // constructor() {
-    //     super();
-    //     this.x = this.x.bind(this);
-    // }
+    constructor() {
+        super();
+        this.startReg = this.startReg.bind(this);
+    }
 
     render() {
     	return (
@@ -18,7 +18,7 @@ class Landing extends React.Component {
                     <br/>
                     <input type='text' placeholder='Password'/>
                 </form>
-                <h4>Not registered with Caterr? Create your free account!</h4>
+                <a className='reg-link' onClick={this.startReg}>Not registered with Caterr? Create your free account!</a>
             </div>
         );
     }
