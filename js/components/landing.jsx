@@ -9,6 +9,10 @@ class Landing extends React.Component {
         this.startReg = this.startReg.bind(this);
     }
 
+    startReg() {
+        browserHistory.push('/register');
+    }
+
     render() {
     	return (
             <div className="landing">
