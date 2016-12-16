@@ -3,7 +3,7 @@ import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import Landing from './components/landing';
 import Register from './components/register';
 import HostReg from './components/host-reg';
-import StaffReg from './components/staff-reg'
+import StaffReg from './components/staff-reg';
 import Nav from './components/nav';
 
 let App = (props) => {
