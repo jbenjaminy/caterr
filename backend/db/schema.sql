@@ -4,9 +4,8 @@ create table if not exists admins (
     password text not null,
     first_name text not null,
     last_name text not null,
-    phone integer not null,
+    phone text not null,
     email text not null unique,
-    -- choose which type of staff you can supply
     has_waitstaff boolean not null,
     has_bartenders boolean not null,
     has_valets boolean not null,
@@ -24,25 +23,11 @@ create table if not exists hosts (
     zip integer not null,
     contact_first_name text not null,
     contact_last_name text not null,
-    contact_phone integer not null,
-    contact_email text not null unique
-    company_phone integer,
+    contact_phone text not null,
+    contact_email text not null unique,
+    company_phone text,
     company_email text unique,
-    website text,
-);
-
-create table if not exists hosts (
-    id serial primary key,
-    username text not null unique,
-    password text not null,
-    first_name text not null,
-    last_name text not null,
-    address text not null,
-    city text not null,
-    state text not null,
-    zip integer not null,
-    phone integer not null,
-    email text not null unique 
+    website text
 );
 
 create table if not exists staff_contact (
@@ -62,7 +47,7 @@ create table if not exists staff_contact (
 
 create table if not exists staff_application (
     id serial primary key,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
 -- personal details
     dob date not null,
     -- 1999-01-08
@@ -114,7 +99,7 @@ create table if not exists staff_application (
 
 create table if not exists staff_documents (
     id serial primary key,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
 -- store images in Amazon S3
     ss_on_file boolean,
     ss_url text,
@@ -136,7 +121,7 @@ create table if not exists staff_documents (
 
 create table if not exists staff_payroll (
     id serial primary key,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
     pay_rate integer not null,
     pay_period_hours integer,
     overtime_hours integer,
@@ -150,7 +135,7 @@ create table if not exists staff_payroll (
 
 create table if not exists staff_status (
     id serial primary key,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
     is_active boolean,
     is_waitstaff boolean,
     is_bartender boolean,
@@ -179,7 +164,7 @@ create table if not exists staff_status (
 
 create table if not exists staff_availability (
     id serial primary key,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
     date_unavailable date
 );
 
@@ -207,18 +192,18 @@ create table if not exists events (
 
 create table if not exists events_staff (
     event_id integer not null references events,
-    staff_id integer not null references staff,
+    staff_id integer not null references staff_contact,
     responded boolean,
-    accepted boolean,
+    accepted boolean
     -- timestamp
 );
 
 create table if not exists hosts_staff (
-    caterer_id integer not null references caterers,
-    staff_id integer not null references staff,
+    caterer_id integer not null references hosts,
+    staff_id integer not null references staff_contact,
     preferred boolean,
     uneligable boolean,
-    notes text,
+    notes text
     -- separate positive and negative feedback and post positive on their dashboard 
 );
 -- messages
