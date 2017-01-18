@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
+const knex = require('./backend/database/connect');
 
 /*---------------------------FUNCTIONS -----------------------------*/
 const loginAdmin = require('./backend/functions/admin/login-admin');
@@ -247,13 +248,19 @@ app.delete('/events/delete/:event_id', function(req, res) {
 // Staff register
 app.post('/staff', (req, res) => {
     let staff = req.body;
-    addStaff(staff).then((err, data) => {
-        if (err) {
-            console.error(err);
-            return res.sendStatus(500);
-        }
-        res.status(201).json();
-    });
+    knex.insert({ username: staff.username, password: staff.password, first_name: staff.firstName, middle_name: midName, last_name: lastName, email: email, address: street, city: city, state: state, zip: zip, phone: phone})
+        .returning(['id', 'username'])
+        .into('staff_contact')
+        .then((data) => {
+            return response.status(201).json({
+                id: data[0].id, username: data[0].username, acctType: staff
+            });
+        })
+        .catch((error) => {
+            response.status(500).json({
+                error: error
+            });
+        });
 });
 
 // Staff log-in
