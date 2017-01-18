@@ -13,7 +13,7 @@ class StaffReg extends React.Component {
     submitReg(event) {
         event.preventDefault();
         if (this.refs.passwordOneVal.val === this.refs.passwordTwoVal) {
-            this.props.dispatch(actions.addStaff(this.refs.usernameVal.val, this.refs.Val.val, this.refs.usernameVal.val, this.refs.usernameVal.val,));
+            this.props.dispatch(actions.addStaff(this.refs.usernameVal.val, this.refs.passwordOneVal.val, this.refs.firstNameVal.val, this.refs.midNameVal.val, this.refs.lastNameVal.val, this.refs.emailVal.val, this.refs.phoneVal.val, this.refs.streetVal.val, this.refs.cityVal.val, this.refs.stateVal.val, this.refs.zipVal.val));
         } else {
             this.props.dispatch(actions.updateRegStatus('Passwords do not match; please fix and re-submit.'));
         }

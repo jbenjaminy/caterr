@@ -1,6 +1,8 @@
 /*---------------------------DEPENDENCIES -----------------------------*/
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser');
+const jsonParser = bodyParser.json();
 
 /*---------------------------FUNCTIONS -----------------------------*/
 const loginAdmin = require('./backend/functions/admin/login-admin');
@@ -32,11 +34,14 @@ const eventResponse = require('./backend/functions/staff/event-response');
 /*----- Serve Frontend -----*/
 app.use(express.static('./build'));
 
-/*----- Allow CORS-----*/
-app.use(function(request, response, next) {
-  response.header("Access-Control-Allow-Origin", "*");
-  response.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  response.header("Access-Control-Allow-Methods", "PUT");
+// Use JSON Parser everywhere
+app.use(jsonParser);
+
+// CORs handling
+app.use((request, response, next) => {
+  response.header('Access-Control-Allow-Origin', '*');
+  response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  response.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
 
@@ -240,7 +245,7 @@ app.delete('/events/delete/:event_id', function(req, res) {
 
 /*--------------------------- STAFF ENDPOINTS ----------------------------*/
 // Staff register
-app.post('/staff', function(req, res) {
+app.post('/staff', (req, res) => {
     let staff = req.body;
     addStaff(staff).then((err, data) => {
         if (err) {
