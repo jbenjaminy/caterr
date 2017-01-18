@@ -10,6 +10,12 @@ class StaffReg extends React.Component {
         this.submitReg = this.submitReg.bind(this);
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.user.username !== '') {
+            browserHistory.push(`/staff/${nextProps.user.username}`);
+        }
+    }
+
     submitReg(event) {
         event.preventDefault();
         if (this.refs.passwordOneVal.val === this.refs.passwordTwoVal) {
@@ -23,7 +29,7 @@ class StaffReg extends React.Component {
     	return (
             <div className="staff-reg">
                 <h4>{this.props.message}</h4>
-                <form>
+                <form onSubmit={this.submitReg}>
                     <input type='text' placeholder='Username' ref='usernameVal' required/>
                     <br/>
                     <input type='text' placeholder='Password' ref='passwordOneVal' required/>
@@ -48,7 +54,7 @@ class StaffReg extends React.Component {
                     <br/>
                     <input type='text' placeholder='Zip Code' ref='zipVal' required/>
                     <br/>
-                    <button type='submit' onClick={this.submitReg}>Register</button>
+                    <button type='submit'>Register</button>
                 </form>
             </div>
         );
@@ -57,7 +63,8 @@ class StaffReg extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        message: state.regStatus;
+        message: state.regStatus,
+        user: state.user
    	}
 };
 

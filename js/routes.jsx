@@ -5,6 +5,7 @@ import Register from './components/register';
 import HostReg from './components/host-reg';
 import StaffReg from './components/staff-reg';
 import Nav from './components/nav';
+import StaffProfile from './components/staff-profile';
 
 let App = (props) => {
     return (
@@ -25,6 +26,9 @@ const routes = (
                 <IndexRoute component={Register}/>
                 <Route path='/register/host' component={HostReg}/>
                 <Route path='/register/staff' component={StaffReg}/>              
+            </Route>
+            <Route path="/staff/:username">
+                <IndexRoute component={StaffProfile}/>
             </Route>
         </Route>
     </Router>

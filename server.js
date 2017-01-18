@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
-const knex = require('./backend/database/connect');
+const knex = require('./backend/db/connect');
 
 /*---------------------------FUNCTIONS -----------------------------*/
 const loginAdmin = require('./backend/functions/admin/login-admin');
