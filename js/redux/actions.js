@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 // Post request to add new staff member
 let addStaff = (username, password, firstName, midName, lastName, email, phone, street, city, state, zip) => {
+    console.log('addStaff parameters --->', username, password, firstName, midName, lastName, email, phone, street, city, state, zip);
     return (dispatch) => {
         let url = '/staff';
         let request = {
@@ -56,3 +57,4 @@ let updateRegStatus = (newMessage) => {
 };
 
 exports.updateRegStatus = updateRegStatus;
+exports.addStaff = addStaff;

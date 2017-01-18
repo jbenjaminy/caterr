@@ -41,7 +41,7 @@ create table if not exists staff_contact (
     address text not null,
     city text not null,
     state text not null,
-    zip integer not null,
+    zip text not null,
     phone text not null
 );
 

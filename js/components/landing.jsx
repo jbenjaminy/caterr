@@ -16,7 +16,7 @@ class Landing extends React.Component {
 
     render() {
     	return (
-            <div className="register">
+            <div className="landing">
                 <h3>Sign in:</h3>
                 <form>
                     <input type='text' placeholder='Username'/>

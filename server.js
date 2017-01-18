@@ -248,16 +248,16 @@ app.delete('/events/delete/:event_id', function(req, res) {
 // Staff register
 app.post('/staff', (req, res) => {
     let staff = req.body;
-    knex.insert({ username: staff.username, password: staff.password, first_name: staff.firstName, middle_name: midName, last_name: lastName, email: email, address: street, city: city, state: state, zip: zip, phone: phone})
+    knex.insert({ username: staff.username, password: staff.password, first_name: staff.firstName, middle_name: staff.midName, last_name: staff.lastName, email: staff.email, address: staff.street, city: staff.city, state: staff.state, zip: staff.zip, phone: staff.phone})
         .returning(['id', 'username'])
         .into('staff_contact')
         .then((data) => {
-            return response.status(201).json({
-                id: data[0].id, username: data[0].username, acctType: staff
+            return res.status(201).json({
+                id: data[0].id, username: data[0].username, accountDetails: staff, acctType: 'staff', status: 'Account created successfully.'
             });
         })
         .catch((error) => {
-            response.status(500).json({
+            res.status(500).json({
                 error: error
             });
         });

@@ -1,6 +1,7 @@
 let initialState = {
 	user: {
 		username: '',
+		details: {},
 		acctType: '',
 		id: '',
 	},
@@ -11,11 +12,17 @@ function reducer(state=initialState, action) {
 		case 'updateUser': {
 			let username = action.data.username || state.user.username;
 			let acctType = action.data.acctType || state.user.acctType;
+			let accountDetails = action.data.accountDetails || state.user.details;
 			let id = action.data.id || state.user.id;
+			let status = action.data.status || state.regStatus;
 			return Object.assign({}, state, {
-				username: username,
-				acctType: acctType,
-				id: id
+				user: {
+					username: username,
+					details: accountDetails,
+					acctType: acctType,
+					id: id
+				},
+				regStatus: status
 			});
 		}
 		case 'updateRegStatus': {
